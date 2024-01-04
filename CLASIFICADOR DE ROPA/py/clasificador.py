@@ -1,4 +1,3 @@
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
@@ -135,8 +134,21 @@ for i in range(num_imagenes):
   plt.subplot(filas, 2*columnas, 2*i+2)
   graficar_valor_arreglo(i, predicciones, etiquetas_prueba)
 
-imagen = imagenes_prueba[5]
+imagen = imagenes_prueba[4]
 imagen= np.array([imagen])
 prediccion= modelo.predict(imagen)
 
 print('prediccion '+nombres_clases[np.argmax(prediccion[0])])
+
+#Exportacion del modelo
+
+modelo.save('modelo_exportado.h5')
+
+pip install tensorflowjs
+
+#Convertir el archivo a formato tensorflowjs
+!mkdir tfjs_target_dir
+!tensorflowjs_converter -- input_format_keras_modelo_exportado.h5 tfjs_target_dir
+prediccion= modelo.predict(imagen)
+
+
